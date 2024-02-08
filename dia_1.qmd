@@ -1,0 +1,135 @@
+---
+title: "Dia 1"
+author: "Eduardo"
+format: html
+bibliography: references.bib
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+# Introdução
+
+```{r}
+
+```
+
+``` {#primeiro-bloco-python .python}
+import pandas as pd
+```
+
+| Col1 | Col2 | Col3 |
+|------|------|------|
+|      |      |      |
+|      |      |      |
+|      |      |      |
+
+$$
+patos = ovo
+$$ {#eq-patos}
+
+Na equação @eq-patos falamos sobre o código de @primeiro-bloco-python
+
+# Carregando pacotes ou bibliotecas
+
+```{r}
+#| warning: false
+library(palmerpenguins)
+library(tidyverse)
+```
+
+# Dados com NAs
+
+```{r}
+penguins
+```
+
+# Dados do banco de dados filtrados de dados ausentes baseado em asa curta e longa
+
+```{r}
+#| echo: false
+nadadeira <- penguins |>
+      ### nova variável com base em condição
+      mutate(tamanho_nadadeira=
+               if_else(flipper_length_mm >200, "longa", "curta")) |> 
+      ### filtramos para amostras que são NA
+      filter(!is.na(tamanho_nadadeira)) |>
+      ### calculamos mediante DP para grupos
+      summarise(media_bico = mean(bill_length_mm),
+                desv_pad_bico= sd(bill_length_mm),
+                .by = tamanho_nadadeira)
+nadadeira
+```
+
+# Resolução do exercício
+
+## Carregando os pacotes
+
+```{r}
+#| warning: false
+library(palmerpenguins)
+library(tidyverse)
+```
+
+# Dados do banco de dados filtrados de dados ausentes baseado em asa curta e longa
+
+```{r}
+#| echo: false
+nadadeira <- penguins |>
+      ### nova variável com base em condição
+      mutate(tamanho_nadadeira=
+               if_else(flipper_length_mm >200, "longa", "curta")) |> 
+      ### filtramos para amostras que são NA
+      filter(!is.na(tamanho_nadadeira)) |>
+      ### calculamos mediante DP para grupos
+      summarise(media_bico = mean(bill_length_mm),
+                desv_pad_bico= sd(bill_length_mm),
+                .by = tamanho_nadadeira)
+nadadeira
+```
+
+```{r}
+#| eval: false
+bivar <- read.csv("bivariate.csv"); bivar
+```
+
+# Inserindo uma tabela
+
+| Col1    | Col2 |
+|---------|------|
+| teste 1 | 2    |
+| teste 2 | 3    |
+
+# Inserindo uma imagem
+
+![](newplot.png)
+
+# Inserindo LaTeX
+
+$\delta = b^2-4ac$
+
+Estudo sobre estabilidade e @pereira2009
+
+
+
+
+
+

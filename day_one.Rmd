@@ -1,0 +1,78 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+> Curso LAMP
+
+```{r}
+#install.packages("palmerpenguins")
+library(palmerpenguins)
+library(tidyverse)
+```
+
+```{r}
+glimpse(penguins)
+```
+Os fatores representam as classes de cada numeração.
+
+```{r}
+mutate(penguins)
+```
+
+
+# Usando o mutate()
+
+```{r}
+mutate_simple <- mutate(penguins, tamanho_nadadeira = 
+                          if_else(flipper_length_mm > 200, "longa", "curta"))
+mutate_simple
+```
+
+
+# Usando o pip...
+
+```{r}
+nadadeira <- penguins |>
+      ### nova variável com base em condição
+      mutate(tamanho_nadadeira=
+               if_else(flipper_length_mm >200, "longa", "curta")) |> 
+      ### filtramos para amostras que são NA
+      filter(!is.na(tamanho_nadadeira)) |>
+      ### calculamos mediante DP para grupos
+      summarise(media_bico = mean(bill_length_mm),
+                desv_pad_bico= sd(bill_length_mm),
+                .by = tamanho_nadadeira)
+```
+ - Verificar qual o erro está sendo atribuído a este chunk().
+
+
+# Path - onde estamos trabalhando?
+
+```{r}
+getwd()
+```
+
+
+# Carreganodo os dados
+
+```{r}
+bivariate_norm <- read.csv("bivariate.csv"); bivariate_norm
+```
+
+
+
+# Sugestão de criação de pastas
+
+```{r}
+#data # para colocar planilhas e outros dados
+#imagem # para colocar imagens
+#docs # Para documentos
+```
+
+
+
+
+
+
+
